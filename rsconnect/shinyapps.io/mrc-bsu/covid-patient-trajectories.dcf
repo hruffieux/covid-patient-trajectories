@@ -5,7 +5,7 @@ account: mrc-bsu
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4855760
-bundleId: 5131925
+bundleId: 5137143
 url: https://mrc-bsu.shinyapps.io/covid-patient-trajectories/
-when: 1634065047.72203
-lastSyncTime: 1634065047.72204
+when: 1634190990.97585
+lastSyncTime: 1634190990.97586
