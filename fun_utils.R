@@ -29,7 +29,7 @@ plot_subject_trajectories <- function(fit, scores, tnew, list_data,
     
     df_comb$hospital_outcome[df_comb$severity %in% c("HC", "A", "B")] <- "alive"
     
-    df_comb$status <- ifelse(df_comb$hospital_outcome == "dead", 2, 1) # 1 = cencored, 2 = dead
+    df_comb$status <- ifelse(df_comb$hospital_outcome == "dead", 2, 1) # 1 = censored, 2 = dead
   }
   
   if (bool_par) {
@@ -134,16 +134,16 @@ plot_subject_trajectories <- function(fit, scores, tnew, list_data,
       stopifnot(length(status) == 1 & length(time) == 1)
       
       if (status == 2 & time < 50) { # cut prediction if patient died within the analysis window
-        lines(tnew[tnew<=time], y_pred_k[idx][tnew<=time],col="red",lwd=2)
+        lines(tnew[tnew<=time], y_pred_k[idx][tnew<=time],col="black",lwd=2)
         points(time,  y_pred_k[idx][time], pch = 4, cex = 1.25, lwd = 1.5)
         lines(tnew[tnew<=time], y_pred_k[idx][tnew<=time]-1.96*se_pred_k[idx][tnew<=time],
-              col="blue",lwd=2,lty=2)
+              col="grey45",lwd=2,lty=2)
         lines(tnew[tnew<=time], y_pred_k[idx][tnew<=time]+1.96*se_pred_k[idx][tnew<=time],
-              col="blue",lwd=2,lty=2)
+              col="grey45",lwd=2,lty=2)
       } else {
-        lines(tnew, y_pred_k[idx],col="red",lwd=2)
-        lines(tnew,y_pred_k[idx]-1.96*se_pred_k[idx],col="blue",lwd=2,lty=2)
-        lines(tnew,y_pred_k[idx]+1.96*se_pred_k[idx],col="blue",lwd=2,lty=2)
+        lines(tnew, y_pred_k[idx],col="black",lwd=2)
+        lines(tnew,y_pred_k[idx]-1.96*se_pred_k[idx],col="grey45",lwd=2,lty=2)
+        lines(tnew,y_pred_k[idx]+1.96*se_pred_k[idx],col="grey45",lwd=2,lty=2)
         # lines(tnew,fit$fit[[paste0("y", k)]]$mu.new,lwd=2,lty=3,col="black") # population average
       }
       
