@@ -153,6 +153,64 @@ plot_subject_trajectories <- function(fit, scores, tnew, list_data,
   
 }
 
+# choose_severity_groups <- function(df_comb, severity_groups) {
+# 
+#   stopifnot(all(severity_groups %in% c("HC", "A", "B", "C", "D", "E")))
+# 
+#   df_comb <- df_comb[df_comb$severity %in% severity_groups,, drop = FALSE]
+#   df_comb$severity <- factor(df_comb$severity, levels = severity_groups)
+# 
+#   print(paste0("Retained levels: ", paste0(levels(df_comb$severity), collapse = ", ")))
+#   print(table(df_comb$severity))
+# 
+#   df_comb
+# 
+# }
+
+add_signif_label <- function(pval) {
+  
+  if (is.na(pval)) {
+    pval_label <- ""
+  } else if (pval < 0.0001) {
+    pval_label <- "****"
+  } else if (pval < 0.001) {
+    pval_label <- "***"
+  } else  if (pval < 0.01) {
+    pval_label <- "**"
+  } else if (pval < 0.05) {
+    pval_label <- "*"
+  } else if (pval < 0.1) {
+    pval_label <- "."
+  } else {
+    pval_label <- ""
+  }
+  
+  pval_label
+}
+
+
+# exclude_low_nzf <- function(df_comb, vec_var, nzf_thres) {
+#   
+#   stopifnot(all(vec_var %in% names(df_comb)))
+#   
+#   vec_nzf <- apply(df_comb[, vec_var, drop = FALSE], 2, 
+#                    function(vv) sum(vv > 0, na.rm = TRUE) / length(vv)) # non-zero frequency
+#   low_nzf_var <- names(vec_nzf)[vec_nzf < nzf_thres]
+#   
+#   if (length(low_nzf_var)>0) {
+#     warning(paste0("Removed variable(s) with non-zero frequency < ", nzf_thres, ": ", paste0(low_nzf_var, collapse = ", ")))
+#   }
+#   
+#   vec_var <- vec_var[!(vec_var %in% low_nzf_var)]
+#   df_comb <- df_comb[, !(colnames(df_comb) %in% low_nzf_var), drop = FALSE] 
+#   
+#   create_named_list(vec_var, df_comb)
+#   
+# }
+# 
+# create_named_list <- function(...) {
+#   setNames(list(...), as.character(match.call()[-1]))
+# }
 
 plot_variance <- function(fit, list_data, tnew, vec_var, disp_param = TRUE, 
                           var_disp_names = NULL) {

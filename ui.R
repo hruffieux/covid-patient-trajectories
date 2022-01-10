@@ -23,8 +23,7 @@ ui <- fluidPage(
              ),
              verbatimTextOutput("hover_info"), 
              width = 11)
-    )
-    ,
+    ),
     tabPanel("FPCA variability & correlation estimates", fluid = TRUE,
              titlePanel('Variance, auto-correlation and cross-correlation functions'),
              p("Select a data type to visualize the corresponding estimates."),
@@ -38,6 +37,29 @@ ui <- fluidPage(
                            plotOutput("plot_variance", height = "500px"))
              ),
              width = 11)
+    ),
+    tabPanel("Group-level longitudinal estimates", fluid = TRUE,
+             titlePanel('Recovery group trajectories estimated by longitudinal mixed modeling.'),
+             p("Select a data type to visualize the corresponding trajectory estimates."),
+             fluidRow(
+               column(3, selectInput('data_type_tab3', 'Data type', 
+                                   c("Cell subsets" = "cell_subsets",
+                                     "Cytokines" = "cytokines", 
+                                     "Polar metabolites" = "polar_metabolites",
+                                     "Glycoproteins" = "glycoproteins",
+                                     "Lipoproteins" = "lipoproteins",
+                                     "Ratios" = "log_ratios"))),
+               multiple = TRUE
+             ),
+             mainPanel(fluidRow(
+                 splitLayout(cellWidths = c("25%", "25%", "25%", "25%"),
+                             uiOutput("plot_group_level_trajectories"),
+                             uiOutput("plot_group_level_trajectories2"),
+                             uiOutput("plot_group_level_trajectories3"),
+                             uiOutput("plot_group_level_trajectories4"))
+              ),
+             width = 11),
+             fluidRow(imageOutput("legend_group_level_trajectories"))
     )
   )
 )
