@@ -315,35 +315,15 @@ server <- function(input, output, session) {
     )
   }, deleteFile = FALSE)
 
-  data_types <- c("cell_subsets", 
-                 "cytokines",
-                 "polar_metabolites", 
-                 "glycoproteins",
-                 "lipoproteins",
-                 "log_ratios")
-  
-
   
   observe({
     
-    data_id <- which(data_types == selectedDataTypeTab3()[[1]])
-    
-    resp_var <- sort(names(list(df_ct,
-                                df_cytokine,
-                                df_ms,
-                                df_glyc,
-                                df_nmr_lp, 
-                                df_all_ratios)[[data_id]]))
-    
-    if (selectedDataTypeTab3()[[1]] == "glycoproteins") {
-      resp_var <- setdiff(resp_var, c("GlycA+GlycB", "Ratio_SPC_GlycA", "Ratio_SPC_GlycB"))
-    }
-    
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
+
     for (i in resp_var)
     {
       local({
-        my_i <- i
-        imagename = paste0("group_level_longitudinal_", my_i, ".png")
+        imagename = i
         output[[imagename]] <-
           renderImage({
             list(src = imagename, 
@@ -357,18 +337,7 @@ server <- function(input, output, session) {
   
   output$plot_group_level_trajectories <- renderUI({
     
-    data_id <- which(data_types == selectedDataTypeTab3()[[1]])
-    
-    resp_var <- sort(names(list(df_ct,
-                                df_cytokine,
-                                df_ms,
-                                df_glyc,
-                                df_nmr_lp, 
-                                df_all_ratios)[[data_id]]))
-    
-    if (selectedDataTypeTab3()[[1]] == "glycoproteins") {
-      resp_var <- setdiff(resp_var, c("GlycA+GlycB", "Ratio_SPC_GlycA", "Ratio_SPC_GlycB"))
-    }
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
     
     vec_id <- rep(1:4, length.out = length(resp_var))
     
@@ -376,7 +345,7 @@ server <- function(input, output, session) {
       lapply(resp_var[vec_id == 1],
              function(i)
              {
-               imagename = paste0("group_level_longitudinal_", i, ".png")
+               imagename = i
                imageOutput(imagename)
              })
     
@@ -385,18 +354,7 @@ server <- function(input, output, session) {
   
   output$plot_group_level_trajectories2 <- renderUI({
     
-    data_id <- which(data_types == selectedDataTypeTab3()[[1]])
-    
-    resp_var <- sort(names(list(df_ct,
-                                df_cytokine,
-                                df_ms,
-                                df_glyc,
-                                df_nmr_lp, 
-                                df_all_ratios)[[data_id]]))
-    
-    if (selectedDataTypeTab3()[[1]] == "glycoproteins") {
-      resp_var <- setdiff(resp_var, c("GlycA+GlycB", "Ratio_SPC_GlycA", "Ratio_SPC_GlycB"))
-    }
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
     
     vec_id <- rep(1:4, length.out = length(resp_var))
     
@@ -404,7 +362,7 @@ server <- function(input, output, session) {
       lapply(resp_var[vec_id == 2],
              function(i)
              {
-               imagename =  paste0("group_level_longitudinal_", i, ".png")
+               imagename = i
                imageOutput(imagename)
              })
     
@@ -413,18 +371,7 @@ server <- function(input, output, session) {
   
   output$plot_group_level_trajectories3 <- renderUI({
     
-    data_id <- which(data_types == selectedDataTypeTab3()[[1]])
-    
-    resp_var <- sort(names(list(df_ct,
-                                df_cytokine,
-                                df_ms,
-                                df_glyc,
-                                df_nmr_lp, 
-                                df_all_ratios)[[data_id]]))
-    
-    if (selectedDataTypeTab3()[[1]] == "glycoproteins") {
-      resp_var <- setdiff(resp_var, c("GlycA+GlycB", "Ratio_SPC_GlycA", "Ratio_SPC_GlycB"))
-    }
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
     
     vec_id <- rep(1:4, length.out = length(resp_var))
     
@@ -432,7 +379,7 @@ server <- function(input, output, session) {
       lapply(resp_var[vec_id == 3],
              function(i)
              {
-               imagename =  paste0("group_level_longitudinal_", i, ".png")
+               imagename = i
                imageOutput(imagename)
              })
     
@@ -441,18 +388,7 @@ server <- function(input, output, session) {
   
   output$plot_group_level_trajectories4 <- renderUI({
     
-    data_id <- which(data_types == selectedDataTypeTab3()[[1]])
-    
-    resp_var <- sort(names(list(df_ct,
-                                df_cytokine,
-                                df_ms,
-                                df_glyc,
-                                df_nmr_lp, 
-                                df_all_ratios)[[data_id]]))
-    
-    if (selectedDataTypeTab3()[[1]] == "glycoproteins") {
-      resp_var <- setdiff(resp_var, c("GlycA+GlycB", "Ratio_SPC_GlycA", "Ratio_SPC_GlycB"))
-    }
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
     
     vec_id <- rep(1:4, length.out = length(resp_var))
     
@@ -460,7 +396,7 @@ server <- function(input, output, session) {
       lapply(resp_var[vec_id == 4],
              function(i)
              {
-               imagename =  paste0("group_level_longitudinal_", i, ".png")
+               imagename = i
                imageOutput(imagename)
              })
     

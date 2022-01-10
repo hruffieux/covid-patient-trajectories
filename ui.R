@@ -42,13 +42,37 @@ ui <- fluidPage(
              titlePanel('Recovery group trajectories estimated by longitudinal mixed modeling.'),
              p("Select a data type to visualize the corresponding trajectory estimates."),
              fluidRow(
+               tags$head(tags$style(type="text/css", "
+             #loadmessage {
+               position: fixed;
+               top: 0px;
+               left: 0px;
+               width: 100%;
+               padding: 10px 0px 10px 0px;
+               text-align: center;
+               font-weight: bold;
+               font-size: 100%;
+               color: #000000;
+               background-color: MediumSeaGreen;
+               z-index: 105;
+             }
+          ")),
+               conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                                tags$div("Loading...",id="loadmessage"))
+             ),
+             fluidRow(
                column(3, selectInput('data_type_tab3', 'Data type', 
                                    c("Cell subsets" = "cell_subsets",
-                                     "Cytokines" = "cytokines", 
+                                     "Cytokines" = "cytokines",
                                      "Polar metabolites" = "polar_metabolites",
                                      "Glycoproteins" = "glycoproteins",
-                                     "Lipoproteins" = "lipoproteins",
-                                     "Ratios" = "log_ratios"))),
+                                     # "Lipoproteins" = "lipoproteins",
+                                     "Lipoproteins: apolipoproteins" = "lipoproteins_apolipoprotein", 
+                                     "Lipoproteins: cholesterol" = "lipoproteins_cholesterol", 
+                                     "Lipoproteins: phospholipids" = "lipoproteins_phospholipids",
+                                     "Lipoproteins: triglycerides" = "lipoproteins_triglycerides",
+                                     "Ratios" = "log_ratios"
+                                     ))),
                multiple = TRUE
              ),
              mainPanel(fluidRow(
