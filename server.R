@@ -50,6 +50,15 @@ server <- function(input, output, session) {
     list_score_types[[input$score_type_tab2]]$vec_var
   })
   
+  
+  # TAB 3
+  # -----  
+  
+  selectedDataTypeTab3 <- reactive({
+    input$data_type_tab3
+  })
+  
+  
   # HOVER INFO
   # ----------
   
@@ -285,10 +294,117 @@ server <- function(input, output, session) {
     
     par(mfrow=mfrow, mar = c(4.5, 4, 3, 1.5), pty = "s")
     
-    plot_variance(selectedFitTab2(), selectedDataTab2(), tnew, 
-                  selectedVecVarTab2(), disp_param = FALSE, 
+    plot_variance(selectedFitTab2(), 
+                  selectedDataTab2(), 
+                  tnew, 
+                  selectedVecVarTab2(), 
+                  disp_param = FALSE, 
                   var_disp_names = var_disp_names)
     
+  })
+  
+  
+  # GROUP-LEVEL TRAJECTORIES
+  # ------------------------
+  
+
+  output$legend_group_level_trajectories <- renderImage({
+    list(
+      src = "legend_tab3.png",
+      width = "40%", height = "6%"
+    )
+  }, deleteFile = FALSE)
+
+  
+  observe({
+    
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
+
+    for (i in resp_var)
+    {
+      local({
+        imagename = i
+        output[[imagename]] <-
+          renderImage({
+            list(src = imagename, 
+                 width = "90%", height = "80%",
+                 alt = "Image failed to render")
+          }, deleteFile = FALSE)
+      })
+    }
+  })
+  
+  
+  output$plot_group_level_trajectories <- renderUI({
+    
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
+    
+    vec_id <- rep(1:4, length.out = length(resp_var))
+    
+    image_output_list <- 
+      lapply(resp_var[vec_id == 1],
+             function(i)
+             {
+               imagename = i
+               imageOutput(imagename)
+             })
+    
+    do.call(tagList, image_output_list)
+  })
+  
+  output$plot_group_level_trajectories2 <- renderUI({
+    
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
+    
+    vec_id <- rep(1:4, length.out = length(resp_var))
+    
+    image_output_list <- 
+      lapply(resp_var[vec_id == 2],
+             function(i)
+             {
+               imagename = i
+               imageOutput(imagename)
+             })
+    
+    do.call(tagList, image_output_list)
+  })
+  
+  output$plot_group_level_trajectories3 <- renderUI({
+    
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
+    
+    vec_id <- rep(1:4, length.out = length(resp_var))
+    
+    image_output_list <- 
+      lapply(resp_var[vec_id == 3],
+             function(i)
+             {
+               imagename = i
+               imageOutput(imagename)
+             })
+    
+    do.call(tagList, image_output_list)
+  })
+  
+  output$plot_group_level_trajectories4 <- renderUI({
+    
+    withProgress(message = 'Rendering plots', value = 1, {
+      Sys.sleep(3)
+    })
+    
+    resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
+    
+    vec_id <- rep(1:4, length.out = length(resp_var))
+    
+    image_output_list <- 
+      lapply(resp_var[vec_id == 4],
+             function(i)
+             {
+               imagename = i
+               imageOutput(imagename)
+             })
+    
+    do.call(tagList, image_output_list)
   })
   
 }
