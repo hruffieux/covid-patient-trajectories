@@ -57,7 +57,7 @@ ui <- fluidPage(
                z-index: 105;
              }
           ")),
-               fluidRow(tags$head(tags$style(HTML("
+               tags$head(tags$style(HTML("
     .progress-striped .bar {
       background-color:  AliceBlue;
       background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.6)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.6)), color-stop(0.75, rgba(255, 255, 255, 0.6)), color-stop(0.75, transparent), to(transparent));
@@ -70,11 +70,7 @@ ui <- fluidPage(
            -o-background-size: 40px 40px;
               background-size: 40px 40px;
     }
-  ")))),
-               conditionalPanel(condition="$('html').hasClass('shiny-busy')",
-                                tags$div("Loading...",id="loadmessage"))
-             ),
-             fluidRow(
+  "))),
                column(3, selectInput('data_type_tab3', 'Data type', 
                                    c("Cell subsets" = "cell_subsets",
                                      "Cytokines" = "cytokines",
@@ -87,6 +83,8 @@ ui <- fluidPage(
                                      "Lipoproteins: triglycerides" = "lipoproteins_triglycerides",
                                      "Ratios" = "log_ratios"
                                      ))),
+               conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                                tags$div("Loading...",id="loadmessage")),
                multiple = TRUE
              ),
              mainPanel(fluidRow(
