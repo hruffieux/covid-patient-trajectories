@@ -388,6 +388,10 @@ server <- function(input, output, session) {
   
   output$plot_group_level_trajectories4 <- renderUI({
     
+    withProgress(message = 'Rendering plots', value = 1, {
+      Sys.sleep(3)
+    })
+    
     resp_var <- list.files(pattern = paste0("group_level_longitudinal_", selectedDataTypeTab3()[[1]]))
     
     vec_id <- rep(1:4, length.out = length(resp_var))
