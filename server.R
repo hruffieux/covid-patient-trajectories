@@ -91,16 +91,25 @@ server <- function(input, output, session) {
       score_2 <- format(selectedScores()$EF2[selectedScores()$subject_id %in% subj], digits = 2)
       
       sev <- unique(selectedDfComb()$severity[selectedDfComb()$subject_id %in% subj]) 
-      group <- unique(df_scores$CRP_hclust_3gr_EF1_EF2[df_scores$subject_id %in% subj])
+      group <- unique(df_scores$clusters_mclust[df_scores$subject_id %in% subj])
       
       gender <- unique(selectedDfComb()$gender[selectedDfComb()$subject_id %in% subj])
       age <- unique(selectedDfComb()$age[selectedDfComb()$subject_id %in% subj])
+      vec_other_infection <- unique(selectedDfComb()$other_infection[selectedDfComb()$subject_id %in% subj])
+      if ("proven" %in% vec_other_infection) {
+        other_infection <- "Proven secondary infection. "
+      } else if ("suspected" %in% vec_other_infection) {
+        other_infection <- "Suspected secondary infection. "
+      } else {
+        other_infection <- ""
+      }
+      
       
       paste0("Patient: ", subj, 
-             ", severity score: ", score_1, ", recovery score: ", score_2, "\n", 
+             ", severity score: ", score_1, ", recovery score: ", score_2, ".\n", 
              "Severity class: ", sev, " (", 
              names(selected_severity_groups)[selected_severity_groups==sev], 
-             "), recovery group: ", group, "\n", "Gender: ", gender, ", age: ", 
+             "). ", other_infection, "Recovery group: ", group, ".\n", "Gender: ", gender, ", age: ", 
              age, " years old.")
     }   
   })  ## get
@@ -117,7 +126,7 @@ server <- function(input, output, session) {
       
     } else if (selectedColor() == "Recovery groups") {
       
-      color <- vec_col_gr_3[df_scores$CRP_hclust_3gr_EF1_EF2[match(selectedScores()$subject_id, 
+      color <- vec_col_gr_3[df_scores$clusters_mclust[match(selectedScores()$subject_id, 
                                                                    df_scores$subject_id)]]
       
       color[is.na(color)] <- "grey80" # for subjects which are not assigned to 
@@ -311,7 +320,7 @@ server <- function(input, output, session) {
   output$legend_group_level_trajectories <- renderImage({
     list(
       src = "legend_tab3.png",
-      width = "40%", height = "6%"
+      width = "40%", height = "4%"
     )
   }, deleteFile = FALSE)
 

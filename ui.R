@@ -22,7 +22,7 @@ ui <- fluidPage(
                            plotOutput("plot_trajectories", height = "500px"))
              ),
              verbatimTextOutput("hover_info"), 
-             width = 11)
+             width = 12)
     ),
     tabPanel("FPCA variability & correlation estimates", fluid = TRUE,
              titlePanel('Variance, auto-correlation and cross-correlation functions'),
