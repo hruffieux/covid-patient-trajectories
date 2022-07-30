@@ -92,9 +92,12 @@ server <- function(input, output, session) {
       
       sev <- unique(selectedDfComb()$severity[selectedDfComb()$subject_id %in% subj]) 
       group <- unique(df_scores$clusters_mclust[df_scores$subject_id %in% subj])
+      prob_assignment <- unique(df_scores$mclust_prob_assignment[df_scores$subject_id %in% subj])
       
       gender <- unique(selectedDfComb()$gender[selectedDfComb()$subject_id %in% subj])
       age <- unique(selectedDfComb()$age[selectedDfComb()$subject_id %in% subj])
+      bmi <- unique(selectedDfComb()$bmi[selectedDfComb()$subject_id %in% subj])
+      ethnicity <- unique(selectedDfComb()$ethnicity[selectedDfComb()$subject_id %in% subj])
       vec_other_infection <- unique(selectedDfComb()$other_infection[selectedDfComb()$subject_id %in% subj])
       if ("proven" %in% vec_other_infection) {
         other_infection <- "Proven secondary infection. "
@@ -109,8 +112,11 @@ server <- function(input, output, session) {
              ", severity score: ", score_1, ", recovery score: ", score_2, ".\n", 
              "Severity class: ", sev, " (", 
              names(selected_severity_groups)[selected_severity_groups==sev], 
-             "). ", other_infection, "Recovery group: ", group, ".\n", "Gender: ", gender, ", age: ", 
-             age, " years old.")
+             "). ", other_infection, "Recovery group: ", group, 
+             " (probability of assignment: ",format(prob_assignment, digits = 2), ").\n", 
+             "Gender: ", gender, ", age: ", age, " years old", 
+             ifelse(length(bmi) == 1 && !is.na(bmi), paste0(", BMI: ", bmi), ""),
+             ifelse(length(ethnicity) == 1 && !is.na(ethnicity), paste0(", ", ethnicity, " ethnicity"), ""),".")
     }   
   })  ## get
   
