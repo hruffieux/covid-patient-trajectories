@@ -115,7 +115,7 @@ server <- function(input, output, session) {
              "). ", other_infection, "Recovery group: ", group, 
              " (probability of assignment: ",format(prob_assignment, digits = 2), ").\n", 
              "Gender: ", gender, ", age: ", age, " years old", 
-             ifelse(length(bmi) == 1 && !is.na(bmi), paste0(", BMI: ", bmi), ""),
+             ifelse(length(bmi) == 1 && !is.na(bmi), paste0(", BMI at study entry: ", bmi), ""),
              ifelse(length(ethnicity) == 1 && !is.na(ethnicity), paste0(", ", ethnicity, " ethnicity"), ""),".")
     }   
   })  ## get
