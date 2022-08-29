@@ -206,6 +206,9 @@ server <- function(input, output, session) {
     
     if (selectedVecVar()[[1]] == "log_CRP") {
       var_disp_names <- "CRP"
+    } else if ("TNFa" %in% selectedVecVar()){
+      var_disp_names <- selectedVecVar()
+      var_disp_names[var_disp_names == "TNFa"] <- "TNF"
     } else {
       var_disp_names <- NULL
     }
@@ -263,6 +266,9 @@ server <- function(input, output, session) {
     
     if (selectedVecVarTab2()[[1]] == "log_CRP") {
       var_disp_names <- "CRP"
+    } else if ("TNFa" %in% selectedVecVarTab2()){
+      var_disp_names <- selectedVecVarTab2()
+      var_disp_names[var_disp_names == "TNFa"] <- "TNF"
     } else {
       var_disp_names <- NULL
     }
@@ -293,6 +299,9 @@ server <- function(input, output, session) {
     
     if (selectedVecVarTab2()[[1]] == "log_CRP") {
       var_disp_names <- "CRP"
+    } else if ("TNFa" %in% selectedVecVarTab2()){
+      var_disp_names <- selectedVecVarTab2()
+      var_disp_names[var_disp_names == "TNFa"] <- "TNF"
     } else {
       var_disp_names <- NULL
     }
