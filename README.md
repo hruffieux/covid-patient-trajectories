@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/416464724.svg)](https://zenodo.org/badge/latestdoi/416464724)
+
 ## FPCA estimates of patient disease trajectories after SARS-CoV-2 infection
 
 This repository contains the source code for the RShiny app allowing to browse patient-level biological parameter trajectories and severity & recovery scores after SARS-CoV-2 infection. The tool can be accessed here: [http://shiny.mrc-bsu.cam.ac.uk/apps/covid-19-patient-trajectories/](http://shiny.mrc-bsu.cam.ac.uk/apps/covid-19-patient-trajectories/).
