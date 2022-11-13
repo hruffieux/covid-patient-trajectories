@@ -6,7 +6,7 @@ ui <- fluidPage(
   tabsetPanel(
     tabPanel("FPCA trajectories & scores", fluid = TRUE,
              titlePanel('Estimated patient-level trajectories with severity & recovery scores'),
-             p("Select a data type to visualize the corresponding scores."),
+             p("Select a data type to visualise the corresponding scores."),
              p("Hover over a data point to see the estimated trajectories for a patient."),
              fluidRow(
                column(3, selectInput('score_type', 'Data type', score_names)),
@@ -26,7 +26,7 @@ ui <- fluidPage(
     ),
     tabPanel("FPCA variability & correlation estimates", fluid = TRUE,
              titlePanel('Variance, auto-correlation and cross-correlation functions'),
-             p("Select a data type to visualize the corresponding estimates."),
+             p("Select a data type to visualise the corresponding estimates."),
              fluidRow(
                column(3, selectInput('score_type_tab2', 'Data type', score_names)),
                multiple = TRUE
@@ -39,8 +39,8 @@ ui <- fluidPage(
              width = 11)
     ),
     tabPanel("Group-level longitudinal estimates", fluid = TRUE,
-             titlePanel('Recovery group trajectories estimated by longitudinal mixed modeling.'),
-             p("Select a data type to visualize the corresponding trajectory estimates."),
+             titlePanel('Recovery group trajectories estimated by longitudinal mixed modelling.'),
+             p("Select a data type to visualise the corresponding trajectory estimates."),
              fluidRow(
                tags$head(tags$style(type="text/css", "
              #loadmessage {

@@ -186,7 +186,7 @@ server <- function(input, output, session) {
       leg <- names(vec_col)[-c(1,2)]
       col <- vec_col[-c(1,2)]
     } else if (selectedColor() == "Recovery groups") {
-      leg <- names(vec_col_gr_3)
+      leg <- 1:3 # names(vec_col_gr_3)
       col <- vec_col_gr_3
     }
     
